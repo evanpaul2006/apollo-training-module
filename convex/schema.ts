@@ -34,6 +34,7 @@ export default defineSchema({
     ),
     content: v.optional(v.string()),      // For "text" type: rich text / markdown content
     fileUrl: v.optional(v.string()),      // Convex storage URL for PDF/video uploads
+    storageId: v.optional(v.id("_storage")), // Used for deleting the file when the lesson is deleted
     externalUrl: v.optional(v.string()),  // For YouTube/Vimeo links or PPT embed URLs
     order: v.number(),
     duration: v.optional(v.number()),     // Duration in seconds (for video)

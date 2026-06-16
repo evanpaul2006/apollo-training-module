@@ -58,6 +58,7 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
 
     try {
       let fileUrl = lessonToEdit?.fileUrl;
+      let storageIdToSave = lessonToEdit?.storageId;
 
       if (file) {
         const postUrl = await generateUploadUrl();
@@ -67,6 +68,7 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
           body: file,
         });
         const { storageId } = await result.json();
+        storageIdToSave = storageId;
         fileUrl = await generateFileUrl({ storageId }) ?? undefined;
       }
 
@@ -77,6 +79,7 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
         content: type === "text" ? content : undefined,
         externalUrl: type !== "text" && !file ? externalUrl : undefined,
         fileUrl: type !== "text" && file ? fileUrl : lessonToEdit?.fileUrl,
+        storageId: type !== "text" && file ? storageIdToSave : lessonToEdit?.storageId,
       };
 
       if (lessonToEdit) {

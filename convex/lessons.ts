@@ -64,6 +64,7 @@ export const createLesson = mutation({
     ),
     content: v.optional(v.string()),
     fileUrl: v.optional(v.string()),
+    storageId: v.optional(v.id("_storage")),
     externalUrl: v.optional(v.string()),
     duration: v.optional(v.number()),
   },
@@ -99,6 +100,7 @@ export const updateLesson = mutation({
     ),
     content: v.optional(v.string()),
     fileUrl: v.optional(v.string()),
+    storageId: v.optional(v.id("_storage")),
     externalUrl: v.optional(v.string()),
     duration: v.optional(v.number()),
   },
@@ -116,6 +118,10 @@ export const updateLesson = mutation({
 export const deleteLesson = mutation({
   args: { lessonId: v.id("lessons") },
   handler: async (ctx, args) => {
+    const lesson = await ctx.db.get(args.lessonId);
+    if (lesson?.storageId) {
+      await ctx.storage.delete(lesson.storageId);
+    }
     await ctx.db.delete(args.lessonId);
   },
 });

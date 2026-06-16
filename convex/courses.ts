@@ -96,6 +96,9 @@ export const deleteCourse = mutation({
         .collect();
         
       for (const lesson of lessons) {
+        if (lesson.storageId) {
+          await ctx.storage.delete(lesson.storageId);
+        }
         await ctx.db.delete(lesson._id);
       }
       await ctx.db.delete(chapter._id);
