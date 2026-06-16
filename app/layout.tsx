@@ -27,9 +27,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} h-full antialiased`}
+      className={`dark ${inter.variable} ${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans bg-[#050505] text-white">
+        <div className="noise-overlay" />
         <ConvexClientProvider>
           {children}
           <Toaster position="top-center" />

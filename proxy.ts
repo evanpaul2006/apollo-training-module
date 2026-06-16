@@ -45,7 +45,7 @@ export default function proxy(request: NextRequest) {
     }
   }
 
-  // Redirect root to login
+  // Redirect root to dashboard if logged in, otherwise let them see landing page
   if (pathname === "/") {
     if (session) {
       try {
@@ -55,10 +55,12 @@ export default function proxy(request: NextRequest) {
           request.url
         ));
       } catch {
-        return NextResponse.redirect(new URL("/login", request.url));
+        // Fall back to landing page if session is invalid
+        return NextResponse.next();
       }
     } else {
-      return NextResponse.redirect(new URL("/login", request.url));
+      // No session, allow them to view the landing page
+      return NextResponse.next();
     }
   }
 
