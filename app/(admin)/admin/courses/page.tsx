@@ -71,7 +71,7 @@ export default function AdminCoursesPage() {
       {!courses ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Skeleton key={i} className="h-72 rounded-2xl" />
+            <Skeleton key={i} className="h-72 rounded-2xl bg-neutral-200/60" />
           ))}
         </div>
       ) : courses.length === 0 ? (
@@ -82,72 +82,70 @@ export default function AdminCoursesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
-            <Card key={course._id} className="overflow-hidden rounded-2xl hover:shadow-md transition-shadow group">
-              <div className="aspect-video bg-gradient-to-br from-apollo to-apollo-light flex items-center justify-center relative">
-                {course.thumbnailUrl ? (
-                  <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover" />
-                ) : (
-                  <span className="text-white text-5xl font-bold font-outfit">
-                    {course.title.charAt(0).toUpperCase()}
-                  </span>
-                )}
-                <div className="absolute top-3 right-3 flex gap-2">
-                  <span className={`px-2.5 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 backdrop-blur-sm ${
-                    course.isPublished ? "bg-green-500/90 text-white" : "bg-white/90 text-text-secondary"
-                  }`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${course.isPublished ? "bg-white animate-pulse" : "bg-gray-400"}`}></span>
-                    {course.isPublished ? "Published" : "Draft"}
-                  </span>
+            <div key={course._id} className="group bg-black/5 ring-1 ring-black/5 rounded-[2rem] p-1.5 pressable block">
+              <div className="bg-white text-text-primary dark:text-text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_1px_3px_rgba(0,0,0,0.05)] rounded-[calc(2rem-0.375rem)] overflow-hidden relative flex flex-col h-full">
+                {/* Thumbnail Area */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-surface-secondary m-2 rounded-[calc(2rem-0.375rem-0.5rem)]">
+                  {course.thumbnailUrl ? (
+                    <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-apollo/20 to-apollo/5">
+                      <span className="text-apollo/40 text-6xl font-bold font-outfit">
+                        {course.title.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* Status Badge */}
+                  <div className="absolute top-3 right-3 flex gap-2">
+                    <span className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold rounded-full flex items-center gap-1.5 backdrop-blur-md border ${
+                      course.isPublished ? "bg-white/90 text-text-primary border-black/5" : "bg-black/90 text-white border-white/10"
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${course.isPublished ? "bg-green-500 animate-pulse" : "bg-white/50"}`}></span>
+                      {course.isPublished ? "Published" : "Draft"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content Area */}
+                <div className="p-5 pt-3 flex flex-col flex-1">
+                  <h3 className="font-outfit font-bold text-xl text-text-primary mb-2 line-clamp-1 group-hover:text-apollo transition-colors">
+                    {course.title}
+                  </h3>
+                  <p className="text-sm text-text-secondary line-clamp-2 leading-relaxed flex-1">
+                    {course.description || "No description provided."}
+                  </p>
+
+                  {/* Actions */}
+                  <div className="flex items-center justify-between mt-6 pt-4 border-t border-border/50">
+                    <Link href={`/admin/courses/${course._id}`} className="text-sm font-semibold text-text-primary hover:text-apollo flex items-center gap-1.5 transition-colors">
+                      <Layers size={16} /> Edit Content
+                    </Link>
+                    
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-full hover:bg-surface-secondary text-text-secondary hover:text-text-primary transition-colors focus:outline-none">
+                        <MoreVertical size={16} />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48 rounded-xl">
+                        <DropdownMenuItem onClick={() => window.open(`/learn/courses/${course._id}`, '_blank')} className="cursor-pointer rounded-lg">
+                          <Eye className="mr-2 h-4 w-4" /> View as Learner
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => window.location.href = `/admin/courses/${course._id}/edit`} className="cursor-pointer rounded-lg">
+                          <Edit className="mr-2 h-4 w-4" /> Edit Details
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleTogglePublish(course._id, course.isPublished)} className="cursor-pointer rounded-lg">
+                          <CheckCircle2 className="mr-2 h-4 w-4" /> {course.isPublished ? "Unpublish" : "Publish"}
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => setCourseToDelete(course._id)} className="text-red-600 focus:text-red-600 cursor-pointer rounded-lg">
+                          <Trash2 className="mr-2 h-4 w-4" /> Delete Course
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </div>
               </div>
-              <CardContent className="p-5 pb-2">
-                <h3 className="font-outfit font-bold text-lg text-text-primary mb-2 line-clamp-1">{course.title}</h3>
-                <p className="text-sm text-text-secondary line-clamp-2 min-h-[40px]">{course.description}</p>
-              </CardContent>
-              <CardFooter className="p-5 pt-0 flex justify-between items-center border-t border-border mt-4 pt-4">
-                <div className="flex gap-4 text-sm text-text-secondary font-medium">
-                  <Link href={`/admin/courses/${course._id}`} className="text-apollo hover:underline flex items-center gap-1">
-                    <Layers size={16} /> Edit Content
-                  </Link>
-                </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md hover:bg-muted text-text-secondary hover:text-text-primary">
-                    <MoreVertical size={18} />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48">
-                    <DropdownMenuItem 
-                      onClick={() => window.open(`/learn/courses/${course._id}`, '_blank')}
-                      className="cursor-pointer"
-                    >
-                      <Eye className="mr-2 h-4 w-4" />
-                      View as Learner
-                    </DropdownMenuItem>
-                    <DropdownMenuItem 
-                      onClick={() => window.location.href = `/admin/courses/${course._id}/edit`}
-                      className="cursor-pointer"
-                    >
-                      <Edit className="mr-2 h-4 w-4" />
-                      Edit Details
-                    </DropdownMenuItem>
-                    <DropdownMenuItem 
-                      onClick={() => handleTogglePublish(course._id, course.isPublished)}
-                      className="cursor-pointer"
-                    >
-                      <CheckCircle2 className="mr-2 h-4 w-4" />
-                      {course.isPublished ? "Unpublish" : "Publish"}
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem 
-                      onClick={() => setCourseToDelete(course._id)}
-                      className="text-red-600 focus:text-red-600 cursor-pointer"
-                    >
-                      <Trash2 className="mr-2 h-4 w-4" />
-                      Delete Course
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </CardFooter>
-            </Card>
+            </div>
           ))}
         </div>
       )}

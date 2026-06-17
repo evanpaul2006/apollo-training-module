@@ -83,7 +83,7 @@ export default function CourseDetailsPage() {
   };
 
   if (!course || !chapters) {
-    return <div className="p-8 max-w-4xl mx-auto space-y-8"><Skeleton className="h-[400px]" /></div>;
+    return <div className="p-8 max-w-4xl mx-auto space-y-8"><Skeleton className="h-[400px] bg-neutral-200/60" /></div>;
   }
 
   return (
@@ -108,7 +108,7 @@ export default function CourseDetailsPage() {
         </Button>
       </div>
 
-      <Card className="rounded-2xl border-border shadow-sm">
+      <Card className="rounded-2xl border-border shadow-sm bg-white text-text-primary dark:text-text-primary">
         <CardContent className="p-0">
           <div className="p-6 border-b border-border flex justify-between items-center bg-surface-secondary rounded-t-2xl">
             <div>
@@ -162,6 +162,7 @@ export default function CourseDetailsPage() {
                 placeholder="e.g., Chapter 1: The Basics"
                 required
                 autoFocus
+                className="bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
               />
             </div>
             <DialogFooter>
@@ -210,7 +211,7 @@ function SortableChapterItem({ chapter, index, onDelete, courseId }: any) {
           {chapter.title}
         </p>
       </div>
-      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" asChild className="h-8 w-8 text-apollo hover:text-apollo-dark hover:bg-apollo-muted">
           <Link href={`/admin/courses/${courseId}/chapters/${chapter._id}`}>
             <Edit size={16} />

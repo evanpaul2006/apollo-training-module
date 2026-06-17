@@ -80,8 +80,8 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">
-              <Label>Account Role</Label>
-              <div className="flex p-1.5 bg-surface-secondary border border-border rounded-xl">
+              <Label className="text-text-primary">Account Role</Label>
+              <div className="flex p-1.5 bg-surface-secondary border border-gray-200 rounded-xl">
                 <button
                   type="button"
                   onClick={() => setUsername("admin")}
@@ -108,7 +108,7 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-text-primary">Password</Label>
               <div className="relative">
                 <Input
                   id="password"
@@ -116,7 +116,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="h-12 pr-10"
+                  className="h-12 pr-10 border-gray-200 bg-white text-text-primary focus-visible:ring-apollo"
                 />
                 <button
                   type="button"

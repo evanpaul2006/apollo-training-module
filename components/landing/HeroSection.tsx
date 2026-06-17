@@ -52,7 +52,7 @@ export function HeroSection() {
         
         <motion.div style={{ y: yText, opacity: opacityText }} className="flex flex-col items-center">
           <motion.h1 
-            className="font-heading text-5xl sm:text-7xl lg:text-[7rem] font-medium tracking-tight text-white leading-[0.9] max-w-5xl mb-10"
+            className="font-heading text-4xl sm:text-6xl lg:text-[7rem] font-medium tracking-tight text-white leading-[0.9] max-w-5xl mb-10"
             initial={{ opacity: 0, y: 50, filter: 'blur(15px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
@@ -78,8 +78,8 @@ export function HeroSection() {
             viewport={{ once: true }}
             transition={{ duration: 1.0, delay: 0.3, ease: [0.32, 0.72, 0, 1] }}
           >
-            <Link href="/login" className="block">
-              <Button className="group rounded-full bg-white text-black hover:text-white p-0 text-lg relative overflow-hidden h-14 w-64 border-0 transition-transform duration-300 ease-out active:scale-[0.97]">
+            <Link href="/login" className="block w-full sm:w-auto">
+              <Button className="group rounded-full bg-white text-black hover:text-white p-0 text-lg relative overflow-hidden h-14 w-full sm:w-64 max-w-[280px] border-0 transition-transform duration-300 ease-out active:scale-[0.97]">
                 {/* Fill Background */}
                 <div className="absolute left-0 top-0 bottom-0 w-0 bg-[#58358F] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:w-full z-0" />
                 

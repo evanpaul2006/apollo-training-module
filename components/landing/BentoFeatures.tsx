@@ -14,7 +14,7 @@ export function BentoFeatures() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1.0, ease: [0.32, 0.72, 0, 1] }}
         >
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6 leading-tight">
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6 leading-tight">
             Everything you need to <br className="hidden md:block"/> master your craft.
           </h2>
           <p className="text-xl text-white/50 leading-relaxed font-light">
@@ -31,7 +31,7 @@ export function BentoFeatures() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="p-8 md:p-12 z-10 relative md:w-1/2 flex flex-col justify-center h-full">
+            <div className="p-8 pb-64 md:p-12 md:pb-12 z-10 relative md:w-1/2 flex flex-col justify-center h-full">
               <h3 className="text-3xl font-heading font-medium text-white mb-4">Interactive Modules</h3>
               <p className="text-white/50 text-lg leading-relaxed">
                 Learn through hands-on simulations that mirror real-world manufacturing challenges. Step-by-step guidance.
@@ -89,7 +89,7 @@ export function BentoFeatures() {
 
           {/* Medium cell */}
           <motion.div 
-            className="md:col-span-2 rounded-3xl bg-[#0A0A0A] p-8 md:p-12 border border-white/10 shadow-sm flex flex-col md:flex-row gap-10 items-center cursor-pointer transition-all duration-500 hover:border-white/20 hover:bg-[#0c0c0c] active:scale-[0.98] group"
+            className="md:col-span-2 rounded-3xl bg-[#0A0A0A] p-8 md:p-12 border border-white/10 shadow-sm flex flex-col md:flex-row gap-8 md:gap-10 items-start md:items-center cursor-pointer transition-all duration-500 hover:border-white/20 hover:bg-[#0c0c0c] active:scale-[0.98] group"
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}

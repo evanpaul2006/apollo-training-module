@@ -25,7 +25,7 @@ export function FeatureSplit() {
   ];
 
   return (
-    <section id="features" ref={containerRef} className="py-32 relative">
+    <section id="features" ref={containerRef} className="py-32 relative overflow-hidden">
       {/* Structural Ambient Shadow */}
       <div className="absolute top-1/2 -right-1/4 w-[800px] h-[800px] bg-apollo/10 blur-[200px] rounded-full pointer-events-none" />
 
@@ -33,7 +33,7 @@ export function FeatureSplit() {
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 relative items-start">
           
           {/* Left: Editorial Split Typography (Sticky) */}
-          <div className="w-full md:w-[45%] sticky top-32 flex flex-col justify-center self-start h-auto z-10">
+          <div className="w-full md:w-[45%] relative md:sticky md:top-32 flex flex-col justify-center self-start h-auto z-10">
             <motion.div
               initial={{ opacity: 0, filter: "blur(10px)", x: -20 }}
               whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }}
@@ -61,7 +61,7 @@ export function FeatureSplit() {
                 className="group relative w-full perspective-1000 origin-bottom cursor-pointer"
                 initial={{ opacity: 0, y: 100, rotateX: -10, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-150px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ 
                   duration: 1.0, 
                   ease: [0.32, 0.72, 0, 1] 

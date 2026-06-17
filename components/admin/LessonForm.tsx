@@ -99,7 +99,7 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
   };
 
   return (
-    <Card className="rounded-2xl border-border shadow-sm">
+    <Card className="rounded-2xl border-border shadow-sm bg-white text-text-primary dark:text-text-primary">
       <CardContent className="p-8">
         <form onSubmit={handleSubmit} className="space-y-8">
           <div className="flex items-center justify-between border-b border-border pb-4">
@@ -136,7 +136,7 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="bg-surface-secondary"
+                className="bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
               />
             </div>
 
@@ -146,7 +146,7 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="bg-surface-secondary"
+                className="bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
               />
             </div>
           </div>
@@ -201,13 +201,14 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
                   value={externalUrl}
                   onChange={(e) => setExternalUrl(e.target.value)}
                   placeholder="https://..."
+                  className="bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
                 />
               </div>
             </div>
           )}
 
           <div className="flex justify-end gap-4 pt-4">
-            <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
+            <Button type="button" variant="outline" onClick={onClose} className="hover:bg-surface-secondary hover:text-text-primary dark:hover:bg-surface-secondary dark:hover:text-text-primary dark:border-border dark:text-text-primary">Cancel</Button>
             <Button type="submit" disabled={isSubmitting} className="bg-apollo hover:bg-apollo-dark text-white">
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {lessonToEdit ? "Update Lesson" : "Create Lesson"}

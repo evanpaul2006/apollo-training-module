@@ -80,7 +80,7 @@ export default function ChapterDetailsPage() {
   };
 
   if (!chapter || !lessons) {
-    return <div className="p-8 max-w-4xl mx-auto"><Skeleton className="h-[400px]" /></div>;
+    return <div className="p-8 max-w-4xl mx-auto"><Skeleton className="h-[400px] bg-neutral-200/60" /></div>;
   }
 
   return (
@@ -96,7 +96,7 @@ export default function ChapterDetailsPage() {
       </div>
 
       {!isAddingLesson && !lessonToEdit ? (
-        <Card className="rounded-2xl border-border shadow-sm">
+        <Card className="rounded-2xl border-border shadow-sm bg-white">
           <CardContent className="p-0">
             <div className="p-6 border-b border-border flex justify-between items-center bg-surface-secondary rounded-t-2xl">
               <div>
@@ -184,7 +184,7 @@ function SortableLessonItem({ lesson, onDelete, onEdit }: any) {
           {lesson.title}
         </p>
       </div>
-      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" onClick={onEdit} className="h-8 w-8 text-apollo hover:text-apollo-dark hover:bg-apollo-muted">
           <Edit size={16} />
         </Button>

@@ -81,7 +81,7 @@ export default function EditCoursePage() {
   };
 
   if (!course) {
-    return <div className="p-8 max-w-4xl mx-auto"><Skeleton className="h-96" /></div>;
+    return <div className="p-8 max-w-4xl mx-auto"><Skeleton className="h-96 bg-neutral-200/60" /></div>;
   }
 
   return (
@@ -96,7 +96,7 @@ export default function EditCoursePage() {
         </div>
       </div>
 
-      <Card className="rounded-2xl border-border shadow-sm">
+      <Card className="rounded-2xl border-border shadow-sm bg-white text-text-primary dark:text-text-primary">
         <CardContent className="p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">
@@ -106,7 +106,7 @@ export default function EditCoursePage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="h-12 bg-surface-secondary"
+                className="h-12 bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
               />
             </div>
             
@@ -118,7 +118,7 @@ export default function EditCoursePage() {
                 onChange={(e) => setDescription(e.target.value)}
                 required
                 rows={4}
-                className="w-full rounded-md border border-input bg-surface-secondary px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full rounded-md border border-input bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
             
@@ -167,7 +167,7 @@ export default function EditCoursePage() {
             </div>
             
             <div className="pt-4 flex justify-end gap-4">
-              <Button type="button" variant="outline" asChild className="h-12 px-8">
+              <Button type="button" variant="outline" asChild className="h-12 px-8 hover:bg-surface-secondary hover:text-text-primary dark:hover:bg-surface-secondary dark:hover:text-text-primary dark:border-border dark:text-text-primary">
                 <Link href={`/admin/courses/${courseId}`}>Cancel</Link>
               </Button>
               <Button type="submit" disabled={isSubmitting} className="h-12 px-8 bg-apollo hover:bg-apollo-dark text-white">

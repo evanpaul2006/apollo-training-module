@@ -65,7 +65,7 @@ export default function AdminDashboard() {
         {!courses ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-64 rounded-2xl" />
+              <Skeleton key={i} className="h-64 rounded-2xl bg-neutral-200/60" />
             ))}
           </div>
         ) : courses.length === 0 ? (
@@ -84,34 +84,49 @@ export default function AdminDashboard() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.slice(0, 3).map((course) => (
-              <Card key={course._id} className="overflow-hidden rounded-2xl hover:shadow-md transition-shadow">
-                <div className="aspect-video bg-gradient-to-br from-apollo to-apollo-light flex items-center justify-center relative">
-                  {course.thumbnailUrl ? (
-                    <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-white text-5xl font-bold font-outfit">
-                      {course.title.charAt(0).toUpperCase()}
-                    </span>
-                  )}
-                  <div className="absolute top-3 right-3">
-                    <span className={`px-2.5 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 backdrop-blur-sm ${
-                      course.isPublished ? "bg-green-500/90 text-white" : "bg-white/90 text-text-secondary"
-                    }`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${course.isPublished ? "bg-white animate-pulse" : "bg-gray-400"}`}></span>
-                      {course.isPublished ? "Published" : "Draft"}
-                    </span>
-                  </div>
-                </div>
-                <CardContent className="p-5">
-                  <h3 className="font-outfit font-bold text-lg text-text-primary mb-2 line-clamp-1">{course.title}</h3>
-                  <div className="flex gap-4 text-sm text-text-secondary">
-                    <div className="flex items-center gap-1.5">
-                      <Layers size={16} />
-                      <span>{course.order}</span>
+              <div key={course._id} className="group bg-black/5 ring-1 ring-black/5 rounded-[2rem] p-1.5 pressable block">
+                <div className="bg-white text-text-primary dark:text-text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_1px_3px_rgba(0,0,0,0.05)] rounded-[calc(2rem-0.375rem)] overflow-hidden relative flex flex-col h-full">
+                  {/* Thumbnail Area */}
+                  <div className="relative aspect-[4/3] overflow-hidden bg-surface-secondary m-2 rounded-[calc(2rem-0.375rem-0.5rem)]">
+                    {course.thumbnailUrl ? (
+                      <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-apollo/20 to-apollo/5">
+                        <span className="text-apollo/40 text-6xl font-bold font-outfit">
+                          {course.title.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                    )}
+                    
+                    {/* Status Badge */}
+                    <div className="absolute top-3 right-3 flex gap-2">
+                      <span className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-bold rounded-full flex items-center gap-1.5 backdrop-blur-md border ${
+                        course.isPublished ? "bg-white/90 text-text-primary border-black/5" : "bg-black/90 text-white border-white/10"
+                      }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${course.isPublished ? "bg-green-500 animate-pulse" : "bg-white/50"}`}></span>
+                        {course.isPublished ? "Published" : "Draft"}
+                      </span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+
+                  {/* Content Area */}
+                  <div className="p-5 pt-3 flex flex-col flex-1">
+                    <h3 className="font-outfit font-bold text-xl text-text-primary mb-4 line-clamp-1 group-hover:text-apollo transition-colors">
+                      {course.title}
+                    </h3>
+                    
+                    <div className="flex items-center justify-between mt-auto border-t border-border/50 pt-4">
+                      <div className="flex items-center gap-1.5 text-sm font-medium text-text-secondary">
+                        <Layers size={16} />
+                        <span>{course.order}</span>
+                      </div>
+                      <Link href={`/admin/courses/${course._id}`} className="text-sm font-semibold text-text-primary hover:text-apollo transition-colors">
+                        Manage &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         )}
@@ -122,7 +137,7 @@ export default function AdminDashboard() {
 
 function StatCard({ title, value, icon: Icon, color }: any) {
   return (
-    <Card className="rounded-2xl border-border shadow-sm">
+    <Card className="rounded-2xl border-border shadow-sm bg-white">
       <CardContent className="p-6 flex items-center gap-4">
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${color}`}>
           <Icon size={24} />
@@ -130,7 +145,7 @@ function StatCard({ title, value, icon: Icon, color }: any) {
         <div>
           <p className="text-sm font-medium text-text-secondary">{title}</p>
           {value === undefined ? (
-            <Skeleton className="h-8 w-16 mt-1" />
+            <Skeleton className="h-8 w-16 mt-1 bg-neutral-200/60" />
           ) : (
             <p className="text-2xl font-outfit font-bold text-text-primary">{value}</p>
           )}

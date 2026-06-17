@@ -31,7 +31,7 @@ export default function LessonViewerPage() {
   const adjacentLessons = useQuery(api.lessons.getAdjacentLessons, { lessonId: lessonId as any, courseId: courseId as any });
 
   if (!course || !chapter || !lesson || !allChapters) {
-    return <div className="p-8 max-w-7xl mx-auto"><Skeleton className="h-[600px] rounded-3xl" /></div>;
+    return <div className="p-8 max-w-7xl mx-auto"><Skeleton className="h-[600px] rounded-3xl bg-neutral-200/60" /></div>;
   }
 
   const sortedChapters = [...allChapters].sort((a, b) => a.order - b.order);
@@ -138,7 +138,7 @@ export default function LessonViewerPage() {
 function ChapterNavSection({ chapter, index, currentLessonId, courseId }: any) {
   const lessons = useQuery(api.lessons.listLessons, { chapterId: chapter._id });
 
-  if (!lessons) return <Skeleton className="h-20 w-full rounded-xl" />;
+  if (!lessons) return <Skeleton className="h-20 w-full rounded-xl bg-neutral-200/60" />;
 
   const isCurrentChapter = lessons.some(l => l._id === currentLessonId);
 

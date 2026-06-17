@@ -13,12 +13,12 @@ export function Footer() {
         
         {/* Massive CTA Section */}
         <div className="py-32 md:py-48 flex flex-col items-center text-center">
-          <h2 className="font-heading font-medium text-[clamp(3rem,6vw,6.5rem)] leading-[1.05] tracking-tight text-white max-w-5xl mb-12">
+          <h2 className="font-heading font-medium text-[clamp(2.5rem,8vw,6.5rem)] leading-[1.05] tracking-tight text-white max-w-5xl mb-12 break-words">
             Ready to master the physics of <span className="text-transparent bg-clip-text bg-gradient-to-r from-apollo-light to-white">manufacturing.</span>
           </h2>
           
-          <Link href="/login">
-            <Button className="group rounded-full bg-white text-black hover:text-white p-0 text-lg pressable relative overflow-hidden h-14 w-64 border-0 shadow-[0_0_40px_rgba(255,255,255,0.05)] hover:shadow-[0_0_60px_rgba(255,255,255,0.15)] transition-shadow duration-700">
+          <Link href="/login" className="w-full sm:w-auto flex justify-center">
+            <Button className="group rounded-full bg-white text-black hover:text-white p-0 text-lg pressable relative overflow-hidden h-14 w-[calc(100vw-2rem)] max-w-[280px] sm:w-64 border-0 shadow-[0_0_40px_rgba(255,255,255,0.05)] hover:shadow-[0_0_60px_rgba(255,255,255,0.15)] transition-shadow duration-700">
               {/* Fill Background */}
               <div className="absolute left-0 top-0 bottom-0 w-0 bg-[#58358F] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:w-full z-0" />
               
