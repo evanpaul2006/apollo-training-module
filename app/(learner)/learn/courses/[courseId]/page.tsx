@@ -103,7 +103,7 @@ export default function LearnerCourseOverviewPage() {
             No content available for this course yet.
           </div>
         ) : (
-          <Accordion type="multiple" defaultValue={sortedChapters.map(c => c._id)} className="space-y-3">
+          <Accordion multiple defaultValue={sortedChapters.map(c => c._id)} className="space-y-3">
             {sortedChapters.map((chapter, index) => (
               <ChapterAccordionItem 
                 key={chapter._id} 
