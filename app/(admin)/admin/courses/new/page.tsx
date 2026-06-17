@@ -79,7 +79,7 @@ export default function NewCoursePage() {
         </div>
       </div>
 
-      <Card className="rounded-2xl border-border shadow-sm">
+      <Card className="rounded-2xl border-border shadow-sm bg-white text-text-primary dark:text-text-primary">
         <CardContent className="p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-3">
@@ -90,7 +90,7 @@ export default function NewCoursePage() {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Introduction to Tyres 101"
                 required
-                className="h-12 bg-surface-secondary"
+                className="h-12 bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
               />
             </div>
             
@@ -103,7 +103,7 @@ export default function NewCoursePage() {
                 placeholder="Briefly describe what this course covers..."
                 required
                 rows={4}
-                className="w-full rounded-md border border-input bg-surface-secondary px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full rounded-md border border-input bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
             
