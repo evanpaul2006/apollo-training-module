@@ -184,6 +184,7 @@ function VideoPlayer({ url }: { url?: string }) {
   
   const isYoutube = url.includes("youtube.com") || url.includes("youtu.be");
   const isVimeo = url.includes("vimeo.com");
+  const isGoogleDrive = url.includes("drive.google.com/file/d/");
 
   if (isYoutube) {
     const videoId = url.split("v=")[1] || url.split("youtu.be/")[1];
@@ -205,6 +206,18 @@ function VideoPlayer({ url }: { url?: string }) {
     );
   }
 
+  if (isGoogleDrive) {
+    let embedUrl = url;
+    if (!url.includes("preview")) {
+      embedUrl = url.replace(/\/view.*$/, "/preview").replace(/\/edit.*$/, "/preview");
+    }
+    return (
+      <div className="aspect-video w-full">
+        <iframe src={embedUrl} className="w-full h-full border-0" allowFullScreen allow="autoplay; fullscreen" />
+      </div>
+    );
+  }
+
   return (
     <div className="aspect-video w-full bg-black">
       <video src={url} controls className="w-full h-full object-contain" controlsList="nodownload" />
@@ -215,11 +228,16 @@ function VideoPlayer({ url }: { url?: string }) {
 function PdfViewer({ url }: { url?: string }) {
   if (!url) return <div className="p-12 text-center text-text-secondary bg-surface-secondary">No PDF source provided.</div>;
   
-  // To avoid dealing with react-pdf rendering complexities in a simple way, we can use an iframe first, 
-  // or use react-pdf if preferred. We'll use a responsive iframe for maximum compatibility.
+  let embedUrl = url;
+  if (url.includes("drive.google.com/file/d/")) {
+    embedUrl = url.replace(/\/view.*$/, "/preview").replace(/\/edit.*$/, "/preview");
+  } else if (!url.includes("preview")) {
+    embedUrl = `${url}#toolbar=0`;
+  }
+
   return (
     <div className="w-full h-[600px] md:h-[800px]">
-      <iframe src={`${url}#toolbar=0`} className="w-full h-full border-0" />
+      <iframe src={embedUrl} className="w-full h-full border-0" />
     </div>
   );
 }
@@ -227,6 +245,15 @@ function PdfViewer({ url }: { url?: string }) {
 function PptViewer({ url }: { url?: string }) {
   if (!url) return <div className="p-12 text-center text-text-secondary bg-surface-secondary">No presentation URL provided.</div>;
   
+  if (url.includes("drive.google.com/file/d/")) {
+    const embedUrl = url.replace(/\/view.*$/, "/preview").replace(/\/edit.*$/, "/preview");
+    return (
+      <div className="w-full aspect-video min-h-[500px]">
+        <iframe src={embedUrl} className="w-full h-full border-0" />
+      </div>
+    );
+  }
+
   if (url.includes("docs.google.com/presentation")) {
     const embedUrl = url.replace(/\/edit.*$/, "/embed?start=false&loop=false&delayms=3000");
     return (

@@ -164,45 +164,46 @@ export function LessonForm({ courseId, chapterId, lessonToEdit, onClose }: any) 
             </div>
           )}
 
-          {(type === "video" || type === "pdf" || type === "ppt") && (
+          {type === "video" && (
             <div className="space-y-6 bg-surface-secondary p-6 rounded-xl border border-border">
               <div className="space-y-2">
-                <Label>Upload File</Label>
-                <div className="border-2 border-dashed border-border rounded-xl p-8 text-center bg-white relative hover:bg-gray-50 transition-colors">
-                  <input
-                    type="file"
-                    accept={type === "video" ? "video/*" : type === "pdf" ? ".pdf" : ".ppt,.pptx"}
-                    onChange={handleFileChange}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <Upload size={24} className="text-apollo" />
-                    <p className="font-semibold text-text-primary">Click to upload file</p>
-                    {file && <p className="text-sm text-apollo font-medium">Selected: {file.name}</p>}
-                    {lessonToEdit?.fileUrl && !file && (
-                      <p className="text-sm text-green-600 font-medium">Current file uploaded</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-border" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-surface-secondary px-2 text-text-muted">Or use external URL</span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label>External URL (e.g., YouTube, Vimeo, Google Slides, external PDF)</Label>
+                <Label>External Video URL</Label>
+                <p className="text-xs text-text-muted mb-2">
+                  Paste a link to a YouTube, Vimeo, or Google Drive video. Direct video uploads are disabled to save data egress.
+                </p>
                 <Input
                   value={externalUrl}
                   onChange={(e) => setExternalUrl(e.target.value)}
-                  placeholder="https://..."
-                  className="bg-surface-secondary dark:bg-surface-secondary text-text-primary dark:text-text-primary"
+                  placeholder="https://www.youtube.com/watch?v=... or https://drive.google.com/..."
+                  className="bg-white border-2 border-border focus:border-apollo text-neutral-900 shadow-sm h-11"
                 />
+                {lessonToEdit?.fileUrl && !externalUrl && (
+                  <p className="text-sm text-amber-600 font-medium mt-2">
+                    Warning: This lesson still uses a Convex-hosted video. Please migrate it to YouTube/Vimeo/Drive to save data egress.
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {(type === "pdf" || type === "ppt") && (
+            <div className="space-y-6 bg-surface-secondary p-6 rounded-xl border border-border">
+              <div className="space-y-2">
+                <Label>Google Drive URL</Label>
+                <p className="text-xs text-text-muted mb-2">
+                  Upload your {type.toUpperCase()} file to Google Drive, set permissions to "Anyone with the link", and paste the link here.
+                </p>
+                <Input
+                  value={externalUrl}
+                  onChange={(e) => setExternalUrl(e.target.value)}
+                  placeholder="https://drive.google.com/file/d/.../view?usp=sharing"
+                  className="bg-white border-2 border-border focus:border-apollo text-neutral-900 shadow-sm h-11"
+                />
+                {lessonToEdit?.fileUrl && !externalUrl && (
+                  <p className="text-sm text-amber-600 font-medium mt-2">
+                    Warning: This lesson still uses a Convex-hosted file. Please migrate it to Google Drive to save data egress.
+                  </p>
+                )}
               </div>
             </div>
           )}
